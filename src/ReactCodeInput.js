@@ -103,6 +103,20 @@ class ReactCodeInput extends Component {
     switch (e.keyCode) {
       case 8:
         e.preventDefault()
+
+        if (this.refs[target].value === '') {
+          if (prevTarget) {
+            input = this.state.input.slice()
+            input[target-1] = ''
+            value = input.join('')
+            prevTarget.value = ''
+            prevTarget.focus()
+            this.setState({ value, input })
+          }
+
+          break
+        }
+
         this.refs[target].value = ''
         input = this.state.input.slice()
         input[target] = ''
